@@ -74,7 +74,7 @@ for vlan in vl_parent_response.json():
 # Use the above API calls to get the parent VLAN ref
 ######################################################################################
 
-vl_url = "https://10.1.9.5/wapi/v2.10/vlan"
+vl_url = "https://<your.infoblox.fqdn>/wapi/v2.10/vlan"
 vl_parent_ref = "vlanview/ZG5zLnZsYW5fdmlldyRkZWZhdWx0LjEuNDA5NA:default/1/4094"
 vl_new_vl_name = "Test API Create"
 
