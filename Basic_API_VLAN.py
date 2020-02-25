@@ -20,7 +20,7 @@ disable_warnings(category=InsecureRequestWarning)
 
 api_user = "<your_user_account>"
 password = getpass("Enter your Infoblox password: ")
-nios_base_url = "https://<your.infoblox.fqdn>/wapi/v2.10/"
+nios_base_url = "https://<your.infoblox.fqdn>/wapi/v2.10"
 
 ######################################################################################
 # Below pulls down the "_ref" values for the different VLAN Views you have in Infoblox
@@ -100,12 +100,12 @@ vl_ref_v200 = "vlan/ZG5zAuNjAuNTM:default/test_range_1/v200-TEST_VLAN2/200" # Ge
 
 # Add single VLAN to a network
 put_single_vlan_data = '{"vlans": [{"vlan": "' + vl_ref_v100 + '"}]}'
-net_ref_net1 = "network/ZG5zLm5ldHdvcmskMTAuMC4wLjAvMjcvMA:10.0.0.0/27/default"
+net_ref_net1 = "/network/ZG5zLm5ldHdvcmskMTAuMC4wLjAvMjcvMA:10.0.0.0/27/default"
 put_single_vl_to_net_api = requests.put(nios_base_url + net_ref_net1, data=put_single_vlan_data, verify=False,
                                         auth=(api_user, password))
 
 # Add multiple VLANs to a network
 put_multi_vlan_data = '{"vlans": [{"vlan": "' + vl_ref_v100 + '"}, {"vlan": "' + vl_ref_v200 + '"}]}'
-net_ref_net2 = "network/ZG5zLm5ldHdvcmskMTAuMC4waoasdfaADF:10.10.0.0/24/default"
+net_ref_net2 = "/network/ZG5zLm5ldHdvcmskMTAuMC4waoasdfaADF:10.10.0.0/24/default"
 put_multi_vl_to_net_api = requests.put(nios_base_url + net_ref_net2, data=put_multi_vlan_data,
                                     verify=False, auth=(api_user, password))
