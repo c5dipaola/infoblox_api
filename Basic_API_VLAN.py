@@ -1,8 +1,9 @@
 """
-This file contains multiple snippets of using API calls to manage VLANs in Infoblox
+This file contains multiple snippets of using API calls to manage VLANs in Infoblox.
+
 You will need to find and replace the following to match your Infoblox deployment:
     1. <your_user_account> = Replace with the username you use to make API calls
-    2. <your.infoblox.fqdn> = Replace with your Infblox FQDN or IP address.
+    2. <your.infoblox.fqdn> = Replace with your Infoblox FQDN or IP address.
 
 Note that anywhere you see a "_ref" value, that is just there as an example.  None
 of the "_ref" values below represent a real Infoblox object.  You will need to use
@@ -27,7 +28,7 @@ nios_base_url = "https://<your.infoblox.fqdn>/wapi/v2.10"
 ######################################################################################
 
 vl_view_ref_url = "https://<your.infoblox.fqdn>/wapi/v2.10/vlanview?"
-vl_view_response = requests.get(vl_view_ref_url, auth=(api_user, password), verify=False,)
+vl_view_response = requests.get(vl_view_ref_url, auth=(api_user, password), verify=False, )
 vl_view_JSON = vl_view_response.json()
 
 print(vl_view_JSON)
@@ -68,7 +69,6 @@ vl_parent_response = requests.get(vl_parent_url, verify=False, auth=(api_user, p
 for vlan in vl_parent_response.json():
     print(vlan)
 
-
 ######################################################################################
 # Automatically create a new VLAN in the parent.  This grabs the next available VLAN
 # Use the above API calls to get the parent VLAN ref
@@ -79,12 +79,12 @@ vl_parent_ref = "vlanview/ZG5zLnZsYW5fdmlldyRkZWZhdWx0LjEuNDA5NA:default/1/4094"
 vl_new_vl_name = "Test API Create"
 
 vl_new_vlan_data = '{{"parent":{parent_ref}, ' \
-            '"id":"func:nextavailablevlanid:{parent_ref}", ' \
-            '"name":{vl_name}}}'.format(parent_ref=vl_parent_ref, vl_name=vl_new_vl_name)
+                   '"id":"func:nextavailablevlanid:{parent_ref}", ' \
+                   '"name":{vl_name}}}'.format(parent_ref=vl_parent_ref, vl_name=vl_new_vl_name)
 
 vl_new_vlan_response = requests.post(vl_url, data=vl_new_vlan_data, verify=False, auth=(api_user, password))
 
-print(vl_new_vlan_response.json()) # This prints the "_ref" value of the created VLAN
+print(vl_new_vlan_response.json())  # This prints the "_ref" value of the created VLAN
 
 ######################################################################################
 # Below adds an existing VLAN to an existing network.
@@ -95,8 +95,8 @@ print(vl_new_vlan_response.json()) # This prints the "_ref" value of the created
 ######################################################################################
 
 
-vl_ref_v100 = "vlan/ZG5zAuNjAuNTE:default/test_range_1/v100-TEST_VLAN1/100" # Get this from above API calls
-vl_ref_v200 = "vlan/ZG5zAuNjAuNTM:default/test_range_1/v200-TEST_VLAN2/200" # Get this from above API calls
+vl_ref_v100 = "vlan/ZG5zAuNjAuNTE:default/test_range_1/v100-TEST_VLAN1/100"  # Get this from above API calls
+vl_ref_v200 = "vlan/ZG5zAuNjAuNTM:default/test_range_1/v200-TEST_VLAN2/200"  # Get this from above API calls
 
 # Add single VLAN to a network
 put_single_vlan_data = '{"vlans": [{"vlan": "' + vl_ref_v100 + '"}]}'
@@ -107,5 +107,5 @@ put_single_vl_to_net_api = requests.put(nios_base_url + net_ref_net1, data=put_s
 # Add multiple VLANs to a network
 put_multi_vlan_data = '{"vlans": [{"vlan": "' + vl_ref_v100 + '"}, {"vlan": "' + vl_ref_v200 + '"}]}'
 net_ref_net2 = "/network/ZG5zLm5ldHdvcmskMTAuMC4waoasdfaADF:10.10.0.0/24/default"
-put_multi_vl_to_net_api = requests.put(nios_base_url + net_ref_net2, data=put_multi_vlan_data,
-                                    verify=False, auth=(api_user, password))
+put_multi_vl_to_net_api = requests.put(nios_base_url + net_ref_net2, data=put_multi_vlan_data, verify=False,
+                                       auth=(api_user, password))
