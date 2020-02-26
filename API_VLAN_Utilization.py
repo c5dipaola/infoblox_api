@@ -37,7 +37,7 @@ def auth_request(url_root, username, password_input):
     :return: Returns session cookie to use for further API calls.
 
     Example:
-        nios_base_url = https://infoblox.domain.com/wapi/v2.10 <-- variable for "url_root"
+        nios_base_url = https://<your.infoblox.fqdn>/wapi/v2.10 <-- variable for "url_root"
         username = "api_username"
         password = getpass("Enter the password: ") <-- Securely get "password_input"
         cookiejar = auth_request(nios_base_url, username, password) <-- Assign this function to variable
