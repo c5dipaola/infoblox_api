@@ -28,7 +28,7 @@ nios_base_url = "https://<your.infoblox.fqdn>/wapi/v2.10"
 ######################################################################################
 
 vl_view_ref_url = "https://<your.infoblox.fqdn>/wapi/v2.10/vlanview?"
-vl_view_response = requests.get(vl_view_ref_url, auth=(api_user, password), verify=False, )
+vl_view_response = requests.get(vl_view_ref_url, auth=(api_user, password), verify=False)
 vl_view_JSON = vl_view_response.json()
 
 print(vl_view_JSON)
